@@ -39,7 +39,7 @@ pipeline
            junit '**/target/surefire-reports/*.xml'
            withSonarQubeEnv(installationName: 'sonar')
            {
-            sh './mvn clean sonar:sonar'
+            sh 'mvn clean sonar:sonar'
 
            }
 
