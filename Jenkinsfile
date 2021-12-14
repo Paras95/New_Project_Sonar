@@ -21,9 +21,9 @@ pipeline
 
          sh 'mvn clean install'
          echo "Building......"
-         ls
-         archiveArtifacts artifacts: '/target/*.jar', fingerprint: true 
-         junit 'target/*.jar'
+         sh 'ls'
+         archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
+         
 
           }
           
@@ -35,8 +35,8 @@ pipeline
 
            echo "testing...."
            sh 'mvn test'
-           archiveArtifacts artifacts: 'target/surefire-reports/*.xml', fingerprint: true
-           junit 'target/surefire-reports/*.xml'
+           archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true
+           junit '**/target/surefire-reports/*.xml'
            withSonarQubeEnv(installationName: 'sonar')
            {
             sh './mvnw clean sonar:sonar'
