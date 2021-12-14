@@ -21,7 +21,8 @@ pipeline
 
          sh 'mvn clean install'
          echo "Building......"
-         archiveArtifacts artifacts: 'target/*.jar', fingerprint: true 
+         ls
+         archiveArtifacts artifacts: '/target/*.jar', fingerprint: true 
          junit 'target/*.jar'
 
           }
