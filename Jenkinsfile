@@ -54,7 +54,7 @@ pipeline
          {
           steps{
 
-           echo "Deploying..."
+           echo "Deploying...with neww branch"
 
           }
 
