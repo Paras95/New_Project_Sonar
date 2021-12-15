@@ -16,7 +16,7 @@ pipeline
      stages
 
      {
-        stage('outside'){
+       /* stage('outside'){
           steps{
             /*script{
               paras()
@@ -29,9 +29,9 @@ pipeline
                   '''
                   
             }
-            */
+            
           }
-        }
+        }*/
         stage('Build')
         {
          
