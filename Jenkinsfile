@@ -43,6 +43,7 @@ pipeline
          echo "Building......"
          sh 'ls -al'
          archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
+         stash includes: '**/target/*.jar', name: 'jar1'
         
 
           }
@@ -57,6 +58,7 @@ pipeline
                 sh 'mvn test'
                 archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true
                 def test = junit '**/target/surefire-reports/*.xml'
+                stash includes: '**/target/surefire-reports/*.xml', name: 'xml1'
                 withSonarQubeEnv(installationName: 'sonar')
                 {
                   sh 'mvn clean sonar:sonar'
@@ -99,16 +101,18 @@ pipeline
                         }"""
                 server.download spec: downloadSpec 
                 //def server = Artifactory.server 'ART'
-              
+                unstash 'jar1'
+                unstash 'xml1'
+
                 def uploadSpec = """{
                         "files": [
                                   {
-                                    "pattern": "pom.xml",
-                                    "target": "paras1/1.0/pom.xml"
+                                    "pattern": "my-app-1.0-SNAPSHOT.jar",
+                                    "target": "paras1/1.0/my-app-1.0-SNAPSHOT.jar" 
                                   },
                                   {
-                                    "pattern": "README.md",
-                                    "target": "paras1/1.0/README.md"
+                                    "pattern": "TEST-com.mycompany.app.AppTest.xml",
+                                    "target": "paras1/1.0/TEST-com.mycompany.app.AppTest.xml"
                                   }
                             ]
                       }"""
