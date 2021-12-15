@@ -92,12 +92,12 @@ pipeline
                 def uploadSpec = """{
                         "files": [
                                   {
-                                    "pattern": "./target/*.jar",
-                                    "target": "paras1/1.0/pa"
+                                    "pattern": "**/target/*.jar",
+                                    "target": "paras1/1.0/paras.jar"
                                   },
                                   {
-                                    "pattern": "./target/**/*.xml",
-                                    "target": "paras1/1.0/"
+                                    "pattern": "**/target/**/*.xml",
+                                    "target": "paras1/1.0/paras.xml"
                                   }
                             ]
                       }"""
