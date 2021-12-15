@@ -103,15 +103,15 @@ pipeline
                 //def server = Artifactory.server 'ART'
                 unstash 'jar1'
                 unstash 'xml1'
-
+                sh 'ls -al'
                 def uploadSpec = """{
                         "files": [
                                   {
-                                    "pattern": "my-app-1.0-SNAPSHOT.jar",
+                                    "pattern": "target/my-app-1.0-SNAPSHOT.jar",
                                     "target": "paras1/1.0/my-app-1.0-SNAPSHOT.jar" 
                                   },
                                   {
-                                    "pattern": "TEST-com.mycompany.app.AppTest.xml",
+                                    "pattern": "target/**/TEST-com.mycompany.app.AppTest.xml",
                                     "target": "paras1/1.0/TEST-com.mycompany.app.AppTest.xml"
                                   }
                             ]
