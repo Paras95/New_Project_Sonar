@@ -23,7 +23,7 @@ pipeline
               sh ''' curl -sSf -u "admin:ParasSharma@234" \
                    -X PUT \
                    -T pom.xml \
-                   'http://localhost:8082/example-repo-local/pom.xml'
+                   'http://172.18.0.4:8082/example-repo-local/pom.xml'
                    '''
             }
           }
