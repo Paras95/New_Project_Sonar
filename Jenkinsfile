@@ -18,14 +18,18 @@ pipeline
      {
         stage('outside'){
           steps{
-            script{
+            /*script{
               paras()
-              sh ''' curl -sSf -u "admin:ParasSharma@234" \
+               sh ''' curl -sSf -u "admin:ParasSharma@234" \
                    -X PUT \
                    -T pom.xml \
-                   'http://172.18.0.4:8082/example-repo-local/pom.xml'
-                   '''
+                   'http://172.18.0.4:8082/artifactory/paras/1.0/pom.xml;name=jenkins;key=fromdockerjenkins'
+            
+            
+                  '''
+                  
             }
+            */
           }
         }
         stage('Build')
@@ -74,6 +78,37 @@ pipeline
            echo "Deploying..."
 
           }
+
+
+         }
+
+         stage('Artifacts')
+         {
+          steps()
+          {
+              script()
+              {
+                def server = Artifactory.server 'ART'
+                def uploadSpec = """{
+                        "files": [
+                                  {
+                                    "pattern": "./target/*.jar",
+                                    "target": "paras1/1.0/pa"
+                                  },
+                                  {
+                                    "pattern": "./target/**/*.xml",
+                                    "target": "paras1/1.0/"
+                                  }
+                            ]
+                      }"""
+                server.upload spec: uploadSpec 
+
+
+
+              }
+
+          }
+
 
 
          }
