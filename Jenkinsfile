@@ -99,15 +99,16 @@ pipeline
                         }"""
                 server.download spec: downloadSpec 
                 //def server = Artifactory.server 'ART'
+
                 def uploadSpec = """{
                         "files": [
                                   {
-                                    "pattern": "target/*.jar",
-                                    "target": "paras1/1.0/paras.jar"
+                                    "pattern": "./target/my-app-1.0-SNAPSHOT.jar",
+                                    "target": "paras1/1.0/my-app-1.0-SNAPSHOT.jar"
                                   },
                                   {
-                                    "pattern": "target/**/*.xml",
-                                    "target": "paras1/1.0/paras.xml"
+                                    "pattern": "./target/surefire-reports/TEST-com.mycompany.app.AppTest.xml",
+                                    "target": "paras1/1.0/TEST-com.mycompany.app.AppTest.xml"
                                   }
                             ]
                       }"""
