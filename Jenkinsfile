@@ -89,14 +89,24 @@ pipeline
               script
               {
                 def server = Artifactory.server 'ART'
+                def downloadSpec = """{
+                          "files": [
+                             {
+                                "pattern": "paras/pom.xml",
+                                "target": "bazinga/"
+                             }
+                          ]
+                        }"""
+                server.download spec: downloadSpec 
+                //def server = Artifactory.server 'ART'
                 def uploadSpec = """{
                         "files": [
                                   {
-                                    "pattern": "**/target/*.jar",
+                                    "pattern": "target/*.jar",
                                     "target": "paras1/1.0/paras.jar"
                                   },
                                   {
-                                    "pattern": "**/target/**/*.xml",
+                                    "pattern": "target/**/*.xml",
                                     "target": "paras1/1.0/paras.xml"
                                   }
                             ]
