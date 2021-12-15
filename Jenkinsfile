@@ -2,6 +2,7 @@
 
 def name 
 
+
 pipeline
 {
   agent any
@@ -19,6 +20,11 @@ pipeline
           steps{
             script{
               paras()
+              sh ''' curl -sSf -u "admin:ParasSharma@234" \
+                   -X PUT \
+                   -T pom.xml \
+                   'http://localhost:8082/example-repo-local/pom.xml'
+                   '''
             }
           }
         }
