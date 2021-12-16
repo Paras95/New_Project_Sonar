@@ -102,7 +102,7 @@ pipeline
                         "files": [
                                   {
                                     "pattern": "pom.xml",
-                                    "target": "pom.xml"
+                                    "target": "new/1.0/pom.xml"
                                   }
                             ]
                       }"""
