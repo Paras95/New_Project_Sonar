@@ -101,14 +101,8 @@ pipeline
                 def uploadSpec = """{
                         "files": [
                                   {
-                                    "pattern": "target/my-app-1.0-SNAPSHOT.jar",
-                                    "target": "new/1.0/my-app-1.0-SNAPSHOT.jar"
-                                    
-                                  },
-                                  {
-                                    "pattern": "target/**/TEST-com.mycompany.app.AppTest.xml",
-                                    "target": "new/1.0/TEST-com.mycompany.app.AppTest.xml"
-                                    
+                                    "pattern": "pom.xml",
+                                    "target": "pom.xml"
                                   }
                             ]
                       }"""
