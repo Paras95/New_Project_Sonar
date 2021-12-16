@@ -88,7 +88,7 @@ pipeline
               script
               {
                 def server = Artifactory.server 'ART'
-                def downloadSpec = """{
+               /* def downloadSpec = """{
                           "files": [
                              {
                                 "pattern": "paras/pom.xml",
@@ -96,7 +96,7 @@ pipeline
                              }
                           ]
                         }"""
-                server.download spec: downloadSpec
+                server.download spec: downloadSpec*/
                 sh 'ls -al'
                 def uploadSpec = """{
                         "files": [
