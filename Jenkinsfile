@@ -126,9 +126,12 @@ pipeline
       }
 }
 
+}
 
+
+/*
 // helper
 
 def paras(){
   echo "paras from outside the pipelne"
-}
+}*/
