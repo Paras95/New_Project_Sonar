@@ -43,9 +43,7 @@ pipeline
          echo "Building......"
          sh 'ls -al'
          archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
-         stash includes: '**/target/*.jar', name: 'jar1'
         
-
           }
           
         }
@@ -58,7 +56,6 @@ pipeline
                 sh 'mvn test'
                 archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true
                 def test = junit '**/target/surefire-reports/*.xml'
-                stash includes: '**/target/surefire-reports/*.xml', name: 'xml1'
                 withSonarQubeEnv(installationName: 'sonar')
                 {
                   sh 'mvn clean sonar:sonar'
@@ -84,7 +81,7 @@ pipeline
 
          }
 
-         stage('Artifacts')
+         stage('Jfrog_Artifactory')
          {
           steps
           {
@@ -99,10 +96,7 @@ pipeline
                              }
                           ]
                         }"""
-                server.download spec: downloadSpec 
-                //def server = Artifactory.server 'ART'
-                unstash 'jar1'
-                unstash 'xml1'
+                server.download spec: downloadSpec
                 sh 'ls -al'
                 def uploadSpec = """{
                         "files": [
@@ -117,6 +111,20 @@ pipeline
                             ]
                       }"""
                 server.upload spec: uploadSpec 
+
+                def setPropsSpec = """{
+                          "files": [
+                                     {
+                                      "pattern": "target/my-app-1.0-SNAPSHOT.jar",
+                                      "props": "filter-by-this-prop=yes"
+                                      },
+                                      {
+                                      "pattern": "target/**/TEST-com.mycompany.app.AppTest.xml",
+                                      "props": "filter-by-this-prop=yes"
+                                      }
+                                   ]
+                                   }"""
+                                   server.setProps spec: setPropsSpec, props: “p1=v1;p2=v2”
 
 
 
