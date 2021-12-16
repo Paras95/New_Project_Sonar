@@ -102,12 +102,12 @@ pipeline
                         "files": [
                                   {
                                     "pattern": "target/my-app-1.0-SNAPSHOT.jar",
-                                    "target": "paras1/1.0/my-app-1.0-SNAPSHOT.jar",
+                                    "target": "paras1/1.0/my-app-1.0-SNAPSHOT.jar"
                                     
                                   },
                                   {
                                     "pattern": "target/**/TEST-com.mycompany.app.AppTest.xml",
-                                    "target": "paras1/1.0/TEST-com.mycompany.app.AppTest.xml",
+                                    "target": "paras1/1.0/TEST-com.mycompany.app.AppTest.xml"
                                     
                                   }
                             ]
