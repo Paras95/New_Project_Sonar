@@ -88,7 +88,7 @@ pipeline
               script
               {
                 def server = Artifactory.server 'ART'
-               /* def downloadSpec = """{
+                def downloadSpec = """{
                           "files": [
                              {
                                 "pattern": "paras/pom.xml",
@@ -96,39 +96,25 @@ pipeline
                              }
                           ]
                         }"""
-                server.download spec: downloadSpec*/
+                server.download spec: downloadSpec
                 sh 'ls -al'
                 def uploadSpec = """{
                         "files": [
                                   {
                                     "pattern": "target/my-app-1.0-SNAPSHOT.jar",
-                                    "target": "paras1/1.0/my-app-1.0-SNAPSHOT.jar" 
+                                    "target": "paras1/1.0/my-app-1.0-SNAPSHOT.jar",
+                                    "props": "filter-by-this-prop=yes"
                                   },
                                   {
                                     "pattern": "target/**/TEST-com.mycompany.app.AppTest.xml",
-                                    "target": "paras1/1.0/TEST-com.mycompany.app.AppTest.xml"
+                                    "target": "paras1/1.0/TEST-com.mycompany.app.AppTest.xml",
+                                    "props": "filter-by-this-prop=yes"
                                   }
                             ]
                       }"""
                 server.upload spec: uploadSpec 
 
-                def setPropsSpec = """{
-                          "files": [
-                                     {
-                                      "pattern": "target/my-app-1.0-SNAPSHOT.jar",
-                                      "props": "filter-by-this-prop=yes"
-                                      },
-                                      {
-                                      "pattern": "target/**/TEST-com.mycompany.app.AppTest.xml",
-                                      "props": "filter-by-this-prop=yes"
-                                      }
-                                   ]
-                                   }"""
-                                   server.setProps spec: setPropsSpec, props: “p1=v1;p2=v2”
 
-
-
-              }
 
           }
 
