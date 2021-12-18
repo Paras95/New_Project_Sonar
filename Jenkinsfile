@@ -61,7 +61,6 @@ pipeline
                   sh 'mvn clean sonar:sonar'
 
                 }
-                archiveArtifacts artifacts: '**', fingerprint: true
            
              }
            }
@@ -103,6 +102,7 @@ pipeline
                 cd target
                 ls -al
                 '''
+                archiveArtifacts artifacts: '**', fingerprint: true
                 def uploadSpec = """{
                         "files": [
                                   {
