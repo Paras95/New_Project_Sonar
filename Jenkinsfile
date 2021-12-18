@@ -104,7 +104,13 @@ pipeline
                                     "pattern": "pom.xml",
                                     "target": "new/1.0/pom.xml",
                                     "props": "filter-by-this-prop=yes"
+                                  },
+                                  {
+                                    "pattern": "target/*.jar",
+                                    "target": "new/1.0/*.jar",
+                                    "props": "filter-by-this-prop=yes11"
                                   }
+
                             ]
                       }"""
                 server.upload spec: uploadSpec 
