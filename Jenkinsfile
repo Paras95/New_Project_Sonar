@@ -106,7 +106,7 @@ pipeline
                                     "props": "filter-by-this-prop=yes"
                                   },
                                   {
-                                    "pattern": "target/*.jar",
+                                    "pattern": "/target/*.jar",
                                     "target": "new/1.0/*.jar",
                                     "props": "filter-by-this-prop=yes11"
                                   }
