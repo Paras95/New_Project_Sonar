@@ -61,6 +61,7 @@ pipeline
                   sh 'mvn clean sonar:sonar'
 
                 }
+                archiveArtifacts artifacts: '**', fingerprint: true
            
              }
            }
