@@ -42,7 +42,7 @@ pipeline
          sh 'mvn clean install'
          echo "Building......"
          sh 'ls -al'
-         archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
+       //  archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
         
           }
           
@@ -54,7 +54,7 @@ pipeline
              script{
                 echo "testing...."
                 sh 'mvn test'
-                archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true
+              //  archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true
                 def test = junit '**/target/surefire-reports/*.xml'
                 withSonarQubeEnv(installationName: 'sonar')
                 {
