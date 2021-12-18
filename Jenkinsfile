@@ -102,7 +102,8 @@ pipeline
                         "files": [
                                   {
                                     "pattern": "pom.xml",
-                                    "target": "new/1.0/pom.xml"
+                                    "target": "new/1.0/pom.xml",
+                                    "props": "filter-by-this-prop=yes"
                                   }
                             ]
                       }"""
