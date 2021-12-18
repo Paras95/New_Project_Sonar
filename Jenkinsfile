@@ -101,12 +101,12 @@ pipeline
                 def uploadSpec = """{
                         "files": [
                                   {
-                                    "pattern": "pom.xml",
-                                    "target": "new/1.0/pom.xml",
+                                    "pattern": "*.xml",
+                                    "target": "new/1.0/*.xml",
                                     "props": "filter-by-this-prop=yes"
                                   },
                                   {
-                                    "pattern": "/target/*.jar",
+                                    "pattern": "**/*.jar",
                                     "target": "new/1.0/*.jar",
                                     "props": "filter-by-this-prop=yes11"
                                   }
