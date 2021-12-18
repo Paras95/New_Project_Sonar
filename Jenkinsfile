@@ -111,7 +111,7 @@ pipeline
                                     "props": "filter-by-this-prop=yes"
                                   },
                                   {
-                                    "pattern": "target/my-app-1.0-SNAPSHOT.jar",
+                                    "pattern": "my-app-1.0-SNAPSHOT.jar",
                                     "target": "new/1.0/my-app-1.0-SNAPSHOT.jar",
                                     "props": "filter-by-this-prop=yes11"
                                   }
