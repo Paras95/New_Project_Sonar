@@ -102,12 +102,12 @@ pipeline
                         "files": [
                                   {
                                     "pattern": "*.xml",
-                                    "target": "new/1.0/*.xml",
+                                    "target": "new/1.0",
                                     "props": "filter-by-this-prop=yes"
                                   },
                                   {
                                     "pattern": "**/*.jar",
-                                    "target": "new/1.0/*.jar",
+                                    "target": "new/1.0",
                                     "props": "filter-by-this-prop=yes11"
                                   }
 
