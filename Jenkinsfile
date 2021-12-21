@@ -105,8 +105,8 @@ pipeline
                 ls -al
                 '''
                 sh ''
-                archiveArtifacts artifacts: '**/target11/*.jar', fingerprint: true
-                archiveArtifacts artifacts: '**/target11/surefire-reports/*.xml', fingerprint: true
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+                archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true
                 sh 'ls -al'
                 def uploadSpec = """{
                         "files": [
@@ -116,7 +116,7 @@ pipeline
                                     "props": "filter-by-this-prop=yes"
                                   },
                                   {
-                                    "pattern": "target11/my-app-1.0-SNAPSHOT.jar",
+                                    "pattern": "target/my-app-1.0-SNAPSHOT.jar",
                                     "target": "new/1.0/my-app-1.0-SNAPSHOT.jar",
                                     "props": "filter-by-this-prop=yes11"
                                   }
