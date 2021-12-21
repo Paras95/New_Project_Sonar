@@ -55,7 +55,7 @@ pipeline
                 echo "testing...."
                 sh 'mvn test'
               //  archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true
-                def test = junit '**/target/surefire-reports/*.xml'
+                //def test = junit '**/target/surefire-reports/*.xml'
                 withSonarQubeEnv(installationName: 'sonar')
                 {
                   sh 'mvn clean sonar:sonar'
@@ -85,6 +85,8 @@ pipeline
          {
           steps
           {
+            sh 'mvn clean install'
+      
               script
               {
                 def server = Artifactory.server 'ART'
@@ -102,7 +104,10 @@ pipeline
                 cd target
                 ls -al
                 '''
-                archiveArtifacts artifacts: '**', fingerprint: true
+                sh ''
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+                archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true
+                sh 'ls -al'
                 def uploadSpec = """{
                         "files": [
                                   {
@@ -111,7 +116,7 @@ pipeline
                                     "props": "filter-by-this-prop=yes"
                                   },
                                   {
-                                    "pattern": "my-app-1.0-SNAPSHOT.jar",
+                                    "pattern": "target/my-app-1.0-SNAPSHOT.jar",
                                     "target": "new/1.0/my-app-1.0-SNAPSHOT.jar",
                                     "props": "filter-by-this-prop=yes11"
                                   }
