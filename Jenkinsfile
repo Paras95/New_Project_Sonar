@@ -39,7 +39,7 @@ pipeline
           steps
          {
           echo "Building......"
-         sh 'mvn clean install'
+         //sh 'mvn clean install'
          sh 'ls -al'
        //  archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
         
