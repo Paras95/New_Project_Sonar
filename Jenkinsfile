@@ -11,7 +11,9 @@ pipeline
       tools
       {
       maven 'maven'
+      terraform 'Terraform'
       }
+      
 
      stages
 
