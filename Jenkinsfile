@@ -16,6 +16,25 @@ pipeline
      stages
 
      {
+       stage('az login')
+      {
+
+        steps
+        {
+         script{
+          withCredentials([azureServicePrincipal('6fd10f2f-770f-46c9-a679-b62cbc48b647')]) {
+            sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
+            sh 'az account set -s $AZURE_SUBSCRIPTION_ID'
+            sh 'az resource list'
+            sh 'terraform init'
+            sh 'terraform plan'
+            sh 'terraform apply --auto-approve'
+
+         }
+        }
+
+        }
+      }
        /* stage('outside'){
           steps{
             script{
@@ -121,43 +140,8 @@ pipeline
 
       }
 
-      stage('az login')
-      {
-
-        steps
-        {
-          sh 'az login'
-
-        }
-      }
-      stage('terraform init')
-      {
-
-        steps
-        {
-          sh 'terraform init'
-
-        }
-      }
-      stage('terraform plan')
-      {
-
-        steps
-        {
-          sh 'terraform plan'
-
-        }
-      }
-
-    stage('terraform apply')
-      {
-
-        steps
-        {
-          sh 'terraform apply --auto-approve'
-
-        }
-      }
+      
+      
 
 }
 
