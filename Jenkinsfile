@@ -38,9 +38,8 @@ pipeline
 
           steps
          {
-
+          echo "Building......"
          sh 'mvn clean install'
-         echo "Building......"
          sh 'ls -al'
        //  archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
         
@@ -61,23 +60,9 @@ pipeline
                   sh 'mvn clean sonar:sonar'
 
                 }
-           
+              sh 'ls -al'
              }
            }
-
-
-         
-
-         }
-
-         stage('Deploye')
-         {
-          steps{
-
-           echo "Deploying..."
-
-          }
-
 
          }
 
@@ -104,7 +89,7 @@ pipeline
                 cd target
                 ls -al
                 '''
-                sh ''
+                
                 archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
                 archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true
                 sh 'ls -al'
@@ -135,6 +120,45 @@ pipeline
 
 
       }
+
+      stage('az login')
+      {
+
+        steps
+        {
+          sh 'az login'
+
+        }
+      }
+      stage('terraform init')
+      {
+
+        steps
+        {
+          sh 'terraform init'
+
+        }
+      }
+      stage('terraform plan')
+      {
+
+        steps
+        {
+          sh 'terraform plan'
+
+        }
+      }
+
+    stage('terraform apply')
+      {
+
+        steps
+        {
+          sh 'terraform apply --auto-approve'
+
+        }
+      }
+
 }
 
 }
