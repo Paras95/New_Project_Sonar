@@ -11,14 +11,14 @@ pipeline
       tools
       {
       maven 'maven'
-      terraform 'Terraform'
+      //terraform 'Terraform'
       }
       
 
      stages
 
      {
-       stage('az login')
+       /*stage('az login')
       {
 
         steps
@@ -37,7 +37,7 @@ pipeline
         }
 
         }
-      }
+      }*/
        /* stage('outside'){
           steps{
             script{
@@ -61,9 +61,9 @@ pipeline
           steps
          {
           echo "Building......"
-         //sh 'mvn clean install'
+         sh 'mvn clean install'
          sh 'ls -al'
-       //  archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
+        archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
         
           }
           
@@ -75,20 +75,28 @@ pipeline
              script{
                 echo "testing...."
                 sh 'mvn test'
-              //  archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true
-                //def test = junit '**/target/surefire-reports/*.xml'
-                withSonarQubeEnv(installationName: 'sonar')
+                archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true
+                def test = junit '**/target/surefire-reports/*.xml'
+                
+                slackSend (
+                channel: "#mychannel",
+                color: '#007D00',
+                message: "\n *Test Summary* - ${test.totalCount}, Failures: ${test.failCount}, Skipped: ${test.skipCount}, Passed: ${test.passCount}"
+                )
+
+
+                /*withSonarQubeEnv(installationName: 'sonar')
                 {
                   sh 'mvn clean sonar:sonar'
 
-                }
+                }*/
               sh 'ls -al'
              }
            }
 
          }
 
-         stage('Jfrog_Artifactory')
+         /*stage('Jfrog_Artifactory')
          {
           steps
           {
@@ -97,7 +105,7 @@ pipeline
               script
               {
                 def server = Artifactory.server 'ART'
-               /* def downloadSpec = """{
+                def downloadSpec = """{
                           "files": [
                              {
                                 "pattern": "paras/pom.xml",
@@ -105,16 +113,16 @@ pipeline
                              }
                           ]
                         }"""
-                server.download spec: downloadSpec*/
+                server.download spec: downloadSpec
                 sh 'ls -al'
                 sh '''
                 cd target
                 ls -al
                 '''
-                
-                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-                archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true
-                sh 'ls -al'
+                */
+                //archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+                //archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true
+                /*sh 'ls -al'
                 def uploadSpec = """{
                         "files": [
                                   {
@@ -141,10 +149,7 @@ pipeline
          }
 
 
-      }
-
-      
-      
+      }*/
 
 }
 
