@@ -79,7 +79,7 @@ pipeline
                 def test = junit '**/target/surefire-reports/*.xml'
                 
                 slackSend (
-                channel: "#mychannel",
+                channel: "#general",
                 color: '#007D00',
                 message: "\n *Test Summary* - ${test.totalCount}, Failures: ${test.failCount}, Skipped: ${test.skipCount}, Passed: ${test.passCount}"
                 )
