@@ -74,7 +74,7 @@ pipeline
                              withSonarQubeEnv(installationName:'sonar'){
                             sh 'mvn sonar:sonar \
                              -Dsonar.projectKey=elk-proj \
-                             //-Dsonar.host.url=http://localhost:9000 \
+                            
                              -Dsonar.login=7616f9cb4d9e93338fc2f35a302a82f099d3d119'
                              }
                              
